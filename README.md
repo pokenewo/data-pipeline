@@ -14,6 +14,8 @@ project/
 
   ├── sql/
 
+  │    ├── init_db.sql
+
   │    ├── schema.sql
 
   │    ├── transformations.sql
