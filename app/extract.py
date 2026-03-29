@@ -41,6 +41,3 @@ def extract(limit=None, save_to_file=True):
         logging.error(f"Erreur de validation : {e}")
         raise
 
-
-if __name__ == "__main__":
-    extract()

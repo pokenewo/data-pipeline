@@ -45,7 +45,11 @@ def validate(data):
         for dlq in dlq_data:
             f.write(json.dumps(dlq) + "\n")
 
-    log = f"number of records = {len(data)}\n number of valid records = {len(valid_data)}\n number of rejected records = {len(dlq_data)}"
-    logging.info(log)
+    logging.info(f"number of records = {len(data)}")
+    logging.info(f"number of valid records = {len(valid_data)}")
+    logging.info(f"number of rejected records = {len(dlq_data)}")
+
+
+                
 
     return valid_data
