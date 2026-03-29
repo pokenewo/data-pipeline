@@ -15,8 +15,8 @@ def load(valid_data):
         logging.info("Chargement en cours...")
         with psycopg2.connect(
             dbname="pipeline_db",
-            user="postgres",
-            password="",
+            user="willo",
+            password="newoXsuzy2008",
             host="localhost",
             port="5432"
         ) as conn:
