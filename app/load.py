@@ -9,7 +9,7 @@ def load(valid_data):
     
     inserted_count = 0
     skipped_count = 0
-    insert_query = """ INSERT INTO staging_posts (user_id,post_id,title,body) VALUES (%s,%s,%s,%s) ON CONFLICT (post_id) DO NOTHING"""
+    insert_query = """ INSERT INTO staging_posts (post_id,user_id,title,body) VALUES (%s,%s,%s,%s) ON CONFLICT (post_id) DO NOTHING"""
 
     try:
         logging.info("Chargement en cours...")
@@ -22,7 +22,7 @@ def load(valid_data):
         ) as conn:
             with conn.cursor() as cur:
                 for record in valid_data:
-                    values = (record['userId'], record['id'], record['title'], record['body'])
+                    values = (record['id'], record['userId'], record['title'], record['body'])
 
                     cur.execute(insert_query,values)
                     if cur.rowcount == 1:
