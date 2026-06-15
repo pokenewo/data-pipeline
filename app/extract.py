@@ -1,3 +1,7 @@
+
+from db import get_required_env
+from pathlib import Path
+
 import requests
 import json
 import logging
@@ -5,7 +9,10 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 def extract(limit=None, save_to_file=True):
-    url = "https://jsonplaceholder.typicode.com/posts"
+    url = get_required_env("API_URL")
+    file = get_required_env("RAW_DATA_PATH")
+    file_path = Path(file)
+    file_path.parent.mkdir(parents=True, exist_ok=True)
 
     try:
         logging.info("Extraction en cours...")
@@ -27,7 +34,7 @@ def extract(limit=None, save_to_file=True):
             data = data[:limit]
         
         if save_to_file:
-            with open("data_raw.json", "w") as f:
+            with open(file_path, "w") as f:
                 json.dump(data,f,indent=4)
         logging.info(f"Nombre de posts extraits : {len(data)}")
 

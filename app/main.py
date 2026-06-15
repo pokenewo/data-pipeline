@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 def main():
 
-    CONN = None
+    conn = None
     db_run_id = None
 
 
@@ -24,7 +24,7 @@ def main():
         
         data = extract()
         valid_data = validate(data)
-        inserted_count = load(valid_data)
+        inserted_count = load(conn,valid_data)
 
         db_extracted_count = len(data)
         db_valid_count = len(valid_data)

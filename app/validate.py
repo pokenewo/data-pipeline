@@ -1,3 +1,7 @@
+
+from db import get_required_env
+from pathlib import Path
+
 import json
 import logging
 
@@ -8,6 +12,9 @@ def validate(data):
     dlq_data = []
     keys = ['userId', 'id', 'title', 'body']
     types = [int,int,str,str]
+    dlq_file = get_required_env("DLQ_PATH")
+    dlq_file_path = Path(dlq_file)
+    dlq_file_path.parent.mkdir(parents=True, exist_ok=True)
 
     for record in data :
         errors = []
@@ -41,7 +48,7 @@ def validate(data):
             dlq = {"record": record, "errors": errors}
             dlq_data.append(dlq)
     
-    with open("dlq.jsonl","w") as f:
+    with open(dlq_file_path,"w") as f:
         for dlq in dlq_data:
             f.write(json.dumps(dlq) + "\n")
 

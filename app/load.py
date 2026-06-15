@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 
-def load(valid_data):
+def load(conn,valid_data):
     
     inserted_count = 0
     skipped_count = 0
@@ -16,7 +16,6 @@ def load(valid_data):
 
     try:
         logging.info("Chargement en cours...")
-        conn = get_connection()
         with conn.cursor() as cur:
             for record in valid_data:
                 values = (record['id'], record['userId'], record['title'], record['body'])
